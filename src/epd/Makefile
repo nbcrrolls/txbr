@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.1 2012/10/23 01:50:17 nadya Exp $
+# $Id: Makefile,v 1.2 2012/11/20 00:15:14 nadya Exp $
 #
 # @Copyright@
 # 
@@ -55,30 +55,26 @@
 # @Copyright@
 #
 # $Log: Makefile,v $
+# Revision 1.2  2012/11/20 00:15:14  nadya
+# bootstrap epd before other packages
+#
 # Revision 1.1  2012/10/23 01:50:17  nadya
 # initial partial check in prerequisites
 #
 
 REDHAT.ROOT = $(CURDIR)/../../
-
+MAKE.iscontrib  = 1
 -include $(ROCKSROOT)/etc/Rules.mk
 include Rules.mk
 
+ARCH=x86_64
+
+rpm:: build
+	-cp $(NAME)-*.$(ARCH).rpm $(REDHAT.RPMS)/$(ARCH)/
 
 build:
-	gunzip -c $(NAME)-$(VERSION).$(TARBALL_POSTFIX) | $(TAR) -xf -
-	( 							\
-		cd $(NAME)-$(VERSION);				\
-		./configure --prefix=$(PKGROOT)/$(NAME);	\
-		$(MAKE);					\
-	)
+	mkdir -p $(REDHAT.RPMS)/$(ARCH)/
+	bash epd_free-$(VERSION)-*-$(ARCH).sh  -b -p $(PKGROOT)
+	rm -rf $(PKGROOT)/Doc $(PKGROOT)/LOCAL-REPO
+	rocks create package /opt/txbr $(NAME)-$(VERSION)
 	
-install::
-	mkdir -p $(ROOT)/$(PKGROOT)/$(NAME)
-	(							\
-		cd $(NAME)-$(VERSION);				\
-		$(MAKE) prefix=$(ROOT)/$(PKGROOT)/$(NAME) install;\
-	)
-
-clean::
-	rm -rf $(NAME)-$(VERSION)
