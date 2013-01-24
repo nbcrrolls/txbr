@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.1 2012/10/23 01:50:48 nadya Exp $
+# $Id: Makefile,v 1.2 2013/01/24 20:09:15 clem Exp $
 #
 # @Copyright@
 # 
@@ -55,6 +55,9 @@
 # @Copyright@
 #
 # $Log: Makefile,v $
+# Revision 1.2  2013/01/24 20:09:15  clem
+# fftw3 shared compiled
+#
 # Revision 1.1  2012/10/23 01:50:48  nadya
 # initial partial check in prerequisites
 #
@@ -66,18 +69,18 @@ include Rules.mk
 
 
 build:
-	gunzip -c $(NAME)-$(VERSION).$(TARBALL_POSTFIX) | $(TAR) -xf -
+	gunzip -c fftw-$(VERSION).$(TARBALL_POSTFIX) | $(TAR) -xf -
 	( 							\
-		cd $(NAME)-$(VERSION);				\
-		./configure --prefix=$(PKGROOT)/$(NAME);	\
+		cd fftw-$(VERSION);				\
+		./configure --prefix=$(PKGROOT) --enable-shared;	\
 		$(MAKE);					\
 	)
 	
 install::
-	mkdir -p $(ROOT)/$(PKGROOT)/$(NAME)
+	mkdir -p $(ROOT)/$(PKGROOT)/
 	(							\
-		cd $(NAME)-$(VERSION);				\
-		$(MAKE) prefix=$(ROOT)/$(PKGROOT)/$(NAME) install;\
+		cd fftw-$(VERSION);				\
+		$(MAKE) prefix=$(ROOT)/$(PKGROOT) install;\
 	)
 
 clean::
