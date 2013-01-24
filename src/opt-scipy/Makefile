@@ -1,5 +1,5 @@
-# $Id: Makefile,v 1.1 2013/01/24 17:16:14 clem Exp $
-
+# $Id: Makefile,v 1.2 2013/01/24 18:17:56 clem Exp $
+#
 # @Copyright@
 # 
 # 				Rocks(r)
@@ -54,24 +54,6 @@
 # 
 # @Copyright@
 
-# $Log: Makefile,v $
-# Revision 1.1  2013/01/24 17:16:14  clem
-# Adding scipy
-#
-# This should be part of the python roll
-#
-# Revision 1.4  2012/11/27 00:49:12  phil
-# Copyright Storm for Emerald Boa
-#
-# Revision 1.3  2012/05/06 05:49:19  phil
-# Copyright Storm for Mamba
-#
-# Revision 1.2  2011/07/23 02:31:16  phil
-# Viper Copyright
-#
-# Revision 1.1  2011/07/14 02:24:33  anoop
-# Update python
-# Add numpy
 #
 
 PKGROOT = /opt/python
