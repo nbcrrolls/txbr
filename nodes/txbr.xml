@@ -15,10 +15,39 @@
 
 	<changelog>
 	$Log: txbr.xml,v $
+	Revision 1.2  2013/01/24 23:13:37  clem
+	write down dependency hell in txbr.xml to future reference
+	
 	Revision 1.1  2012/10/23 01:50:13  nadya
 	initial partial check in prerequisites
 	
 	</changelog>
+
+	<!-- atlas needed by scipy, 
+	     rpm comes from centos base repo -->
+        <pakcage>atlas</package>
+        <pakcage>atlas-devel</package>
+	<pakcage>opt-scipy</package>
+	<pakcage>opt-matplotlib</package>
+
+        <!-- gmp needed by cln,
+             cln needed by ginac,
+             opt-swiginac is deployed inside python2.7
+             gpm is from base
+             cln is from epel
+             ginac is from epel-->
+        <pakcage>gmp-devel</package>
+        <package>gmp</package>
+        <pakcage>cln-devel</package>
+        <pakcage>cln</package>
+        <pakcage>ginac</package>
+        <pakcage>ginac-devel</package>
+	<pakcage>opt-swiginac</package>
+
+	<!-- cmake needed by OpenCV -->
+        <package>cmake</package>
+        <package>OpenCV</package>
+
 
 	<package>txbr</package>
 	<package>roll-txbr-usersguide</package>
