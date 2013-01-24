@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.1 2012/10/23 01:50:48 nadya Exp $
+# $Id: Makefile,v 1.2 2013/01/24 20:08:26 clem Exp $
 #
 # @Copyright@
 # 
@@ -55,12 +55,15 @@
 # @Copyright@
 #
 # $Log: Makefile,v $
+# Revision 1.2  2013/01/24 20:08:26  clem
+# temporary commit of ginac (not fixed yet)
+#
 # Revision 1.1  2012/10/23 01:50:48  nadya
 # initial partial check in prerequisites
 #
 
-REDHAT.ROOT = $(CURDIR)/../../
 
+REDHAT.ROOT = $(CURDIR)/../../
 -include $(ROCKSROOT)/etc/Rules.mk
 include Rules.mk
 
@@ -69,7 +72,7 @@ build:
 	tar xvjf  $(NAME)-$(VERSION).$(TARBALL_POSTFIX) 
 	( 							\
 		cd $(NAME)-$(VERSION);				\
-		./configure --prefix=$(PKGROOT)/$(NAME);	\
+		./configure ;	\
 		$(MAKE);					\
 	)
 	
@@ -77,7 +80,7 @@ install::
 	mkdir -p $(ROOT)/$(PKGROOT)/$(NAME)
 	(							\
 		cd $(NAME)-$(VERSION);				\
-		$(MAKE) prefix=$(ROOT)/$(PKGROOT)/$(NAME) install;\
+		$(MAKE) prefix=$(ROOT) install;\
 	)
 
 clean::
