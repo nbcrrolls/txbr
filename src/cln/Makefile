@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.2 2013/01/24 18:37:11 clem Exp $
+# $Id: Makefile,v 1.3 2013/01/24 19:42:23 clem Exp $
 #
 # @Copyright@
 # 
@@ -55,6 +55,9 @@
 # @Copyright@
 #
 # $Log: Makefile,v $
+# Revision 1.3  2013/01/24 19:42:23  clem
+# minor fixes in the makefile of cln
+#
 # Revision 1.2  2013/01/24 18:37:11  clem
 # cln in the default directory (its just a C library)
 #
@@ -62,6 +65,7 @@
 # initial partial check in prerequisites
 #
 
+REDHAT.ROOT = $(CURDIR)/../../
 
 -include $(ROCKSROOT)/etc/Rules.mk
 include Rules.mk
@@ -72,14 +76,14 @@ build:
 	( 							\
 		cd $(NAME)-$(VERSION);				\
 		./configure ;	\
-		$(MAKE);					\
+		$(MAKE) -j 4;					\
 	)
 	
 install::
-	mkdir -p $(ROOT)/$(PKGROOT)/$(NAME)
+	mkdir -p $(ROOT)
 	(							\
 		cd $(NAME)-$(VERSION);				\
-		$(MAKE) prefix=$(ROOT) install;\
+		$(MAKE) DESTDIR=$(ROOT) install;\
 	)
 
 clean::
