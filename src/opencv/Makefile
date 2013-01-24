@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.1 2012/10/23 18:54:56 nadya Exp $
+# $Id: Makefile,v 1.2 2013/01/24 22:27:15 clem Exp $
 #
 # @Copyright@
 # 
@@ -55,6 +55,9 @@
 # @Copyright@
 #
 # $Log: Makefile,v $
+# Revision 1.2  2013/01/24 22:27:15  clem
+# OpenCV compiled
+#
 # Revision 1.1  2012/10/23 18:54:56  nadya
 # initial place holder
 #
@@ -66,21 +69,32 @@ REDHAT.ROOT = $(CURDIR)/../../
 
 -include $(ROCKSROOT)/etc/Rules.mk
 include Rules.mk
-
+PYTHON_LIB      = /opt/python/lib
+PYTHON_PACKAGES = $(PYTHON_LIB)/python2.7/site-packages
 
 build:
 	tar xvjf  $(NAME)-$(VERSION).$(TARBALL_POSTFIX) 
-	( 							\
-		cd $(NAME)-$(VERSION);				\
-		./configure --prefix=$(PKGROOT)/$(NAME);	\
-		$(MAKE);					\
+	( 							  \
+		cd $(NAME)-$(VERSION);				  \
+		cmake -D CMAKE_BUILD_TYPE=RELEASE                 \
+		      -D CMAKE_INSTALL_PREFIX=$(PKGROOT)/$(NAME)  \
+		      -D BUILD_PYTHON_SUPPORT=ON                  \
+		      -D PYTHON_EXECUTABLE=/opt/python/bin/python \
+		      -D PYTHON_PACKAGES_PATH=$(PYTHON_PACKAGES)  \
+		       -D PYTHON_LIBRARIES=$(PYTHON_LIB) .;     \
+		$(MAKE) -j 4;					  \
 	)
 	
 install::
 	mkdir -p $(ROOT)/$(PKGROOT)/$(NAME)
+	mkdir -p $(PKGROOT)/$(NAME)
 	(							\
 		cd $(NAME)-$(VERSION);				\
-		$(MAKE) prefix=$(ROOT)/$(PKGROOT)/$(NAME) install;\
+		mount --bind $(ROOT)/$(PKGROOT)/$(NAME) $(PKGROOT)/$(NAME);     \
+		$(MAKE) install;                                \
+		mkdir -p $(ROOT)/$(PYTHON_PACKAGES);            \
+		cp $(PYTHON_PACKAGES)/cv* $(ROOT)/$(PYTHON_PACKAGES); \
+		umount $(PKGROOT)/$(NAME);                      \
 	)
 
 clean::
