@@ -1,13 +1,13 @@
-# $Id: Makefile,v 1.1 2012/10/23 01:50:48 nadya Exp $
+# $Id: Makefile,v 1.2 2013/01/24 20:00:47 clem Exp $
 #
 # @Copyright@
 # 
 # 				Rocks(r)
 # 		         www.rocksclusters.org
-# 		         version 5.5 (Mamba)
-# 		         version 6.0 (Mamba)
+# 		         version 5.6 (Emerald Boa)
+# 		         version 6.1 (Emerald Boa)
 # 
-# Copyright (c) 2000 - 2012 The Regents of the University of California.
+# Copyright (c) 2000 - 2013 The Regents of the University of California.
 # All rights reserved.	
 # 
 # Redistribution and use in source and binary forms, with or without
@@ -53,32 +53,28 @@
 # IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 # 
 # @Copyright@
-#
-# $Log: Makefile,v $
-# Revision 1.1  2012/10/23 01:50:48  nadya
-# initial partial check in prerequisites
+
 #
 
+PKGROOT = /opt/python
 REDHAT.ROOT = $(CURDIR)/../../
-
 -include $(ROCKSROOT)/etc/Rules.mk
 include Rules.mk
 
+PY.PATH = $(PKGROOT)/bin/python
 
 build:
-	gunzip -c $(NAME)-$(VERSION).$(TARBALL_POSTFIX) | $(TAR) -xf -
-	( 							\
-		cd $(NAME)-$(VERSION);				\
-		./configure --prefix=$(PKGROOT)/$(NAME);	\
-		$(MAKE);					\
+	gunzip -c $(ARCHIVENAME)-$(VERSION).tgz | $(TAR) -xf -
+	(\
+		cd $(ARCHIVENAME)-$(VERSION);	\
+		$(PY.PATH) setup.py build;	\
 	)
-	
-install::
-	mkdir -p $(ROOT)/$(PKGROOT)/$(NAME)
-	(							\
-		cd $(NAME)-$(VERSION);				\
-		$(MAKE) prefix=$(ROOT)/$(PKGROOT)/$(NAME) install;\
+
+install test::
+	(\
+		cd $(ARCHIVENAME)-$(VERSION);	\
+		$(PY.PATH) setup.py $@ --root=$(ROOT)/; \
 	)
 
 clean::
-	rm -rf $(NAME)-$(VERSION)
+	rm -rf $(ARCHIVENAME)-$(VERSION)
