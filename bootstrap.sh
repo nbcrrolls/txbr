@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# $Id: bootstrap.sh,v 1.1 2012/11/20 00:15:14 nadya Exp $
+# $Id: bootstrap.sh,v 1.2 2013/01/24 17:30:53 clem Exp $
 #
 # @Copyright@
 # @Copyright@
@@ -9,6 +9,8 @@
 
 . $ROLLSROOT/etc/bootstrap-functions.sh
 
-compile epd
+install atlas
+install atlas-devel
+compile_and_install opt-scipy
 
 
