@@ -1,5 +1,5 @@
-PKGROOT		= /opt/txbr/epd
-NAME    	= epd
-VERSION 	= 7.3.2
+PKGROOT		= /opt/txbr
+NAME    	= imod
+VERSION 	= 4.5.7
 RELEASE 	= 1
 TARBALL_POSTFIX	= 

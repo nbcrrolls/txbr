@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.1 2012/10/23 18:55:08 nadya Exp $
+# $Id: Makefile,v 1.2 2013/01/25 00:24:00 clem Exp $
 #
 # @Copyright@
 # 
@@ -55,6 +55,9 @@
 # @Copyright@
 #
 # $Log: Makefile,v $
+# Revision 1.2  2013/01/25 00:24:00  clem
+# Imod package compiling
+#
 # Revision 1.1  2012/10/23 18:55:08  nadya
 # initial place holder
 #
@@ -69,13 +72,16 @@ include Rules.mk
 
 
 build:
-	csh $(NAME)_$(VERSION)_$(PREBUILD).csh -extract
+
+
 	
 install::
 	mkdir -p $(ROOT)/$(PKGROOT)/$(NAME)
+	mkdir -p $(PKGROOT)/$(NAME)
 	(							\
-		cd $(NAME)-$(VERSION);				\
-		$(MAKE) prefix=$(ROOT)/$(PKGROOT)/$(NAME) install;\
+		mount --bind $(ROOT)/$(PKGROOT)/$(NAME) $(PKGROOT)/$(NAME);     \
+		csh imod_4.5.7_RHEL6-64.csh -dir $(PKGROOT)/$(NAME) -script $(PKGROOT)/$(NAME) -yes ; \
+		umount $(PKGROOT)/$(NAME);                      \
 	)
 
 clean::
