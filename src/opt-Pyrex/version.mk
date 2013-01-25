@@ -1,0 +1,4 @@
+NAME = opt-Pyrex
+VERSION = 0.9.9
+ARCHIVENAME = Pyrex
+RELEASE = 0
