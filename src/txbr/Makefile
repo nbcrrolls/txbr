@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.1 2012/10/23 01:50:48 nadya Exp $
+# $Id: Makefile,v 1.2 2013/01/25 21:55:52 clem Exp $
 #
 # @Copyright@
 # 
@@ -55,6 +55,11 @@
 # @Copyright@
 #
 # $Log: Makefile,v $
+# Revision 1.2  2013/01/25 21:55:52  clem
+# First version of compiling txbr
+#
+# it is just compiling, it is still missing several deps
+#
 # Revision 1.1  2012/10/23 01:50:48  nadya
 # initial partial check in prerequisites
 #
@@ -64,20 +69,32 @@ REDHAT.ROOT = $(CURDIR)/../../
 -include $(ROCKSROOT)/etc/Rules.mk
 include Rules.mk
 
+PY.PATH  =  /opt/python/bin/python
+PACKAGE_NAME = TxBR
+SETENV   =  export TXBR=`pwd`; export TXBR_DIR=$(PKGROOT);  \
+                export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$$TXBR/lib;\
+		export IMOD=$(PKGROOT)/IMOD;  
+CFGFILE  =  config/setup.cfg.linux
 
 build:
-	gunzip -c $(NAME)-$(VERSION).$(TARBALL_POSTFIX) | $(TAR) -xf -
+	gunzip -c $(PACKAGE_NAME)-beta-$(VERSION).tar.gz | $(TAR) -xf -
+	patch -p0 < fix_libraries_setup_py.patch
 	( 							\
-		cd $(NAME)-$(VERSION);				\
-		./configure --prefix=$(PKGROOT)/$(NAME);	\
-		$(MAKE);					\
+		cd $(PACKAGE_NAME);				\
+		$(SETENV)					\
+		sed -i "s:include-dirs.*:include-dirs=/opt/txbr/OpenCV/include/opencv\:/opt/txbr/OpenCV/include\:/opt/txbr/include:g" $(CFGFILE); \
+		sed -i "s:library-dirs.*:library-dirs=/opt/txbr/lib\:/opt/txbr/OpenCV/lib\:/opt/txbr/imod/IMOD/lib/:g" $(CFGFILE); \
+		sed -i '/install-purelib/d' $(CFGFILE); 	\
+		sed -i '/install-platlib/d' $(CFGFILE);		\
+		$(PY.PATH) setup.py build; 			\
 	)
 	
 install::
 	mkdir -p $(ROOT)/$(PKGROOT)/$(NAME)
 	(							\
-		cd $(NAME)-$(VERSION);				\
-		$(MAKE) prefix=$(ROOT)/$(PKGROOT)/$(NAME) install;\
+		cd $(PACKAGE_NAME);				\
+		$(SETENV)                                       \
+		$(PY.PATH) setup.py install --root=$(ROOT)/;	\
 	)
 
 clean::
