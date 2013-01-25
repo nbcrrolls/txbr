@@ -1,0 +1,4 @@
+NAME = opt-sympy
+VERSION = 0.7.2
+ARCHIVENAME = sympy
+RELEASE = 0
