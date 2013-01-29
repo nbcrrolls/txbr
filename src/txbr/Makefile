@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.2 2013/01/25 21:55:52 clem Exp $
+# $Id: Makefile,v 1.3 2013/01/29 02:04:53 clem Exp $
 #
 # @Copyright@
 # 
@@ -55,6 +55,11 @@
 # @Copyright@
 #
 # $Log: Makefile,v $
+# Revision 1.3  2013/01/29 02:04:53  clem
+# fixes for the new location of the imod
+#
+# trying to get libpython static in the shared object but it doesnot work yet
+#
 # Revision 1.2  2013/01/25 21:55:52  clem
 # First version of compiling txbr
 #
@@ -83,9 +88,10 @@ build:
 		cd $(PACKAGE_NAME);				\
 		$(SETENV)					\
 		sed -i "s:include-dirs.*:include-dirs=/opt/txbr/OpenCV/include/opencv\:/opt/txbr/OpenCV/include\:/opt/txbr/include:g" $(CFGFILE); \
-		sed -i "s:library-dirs.*:library-dirs=/opt/txbr/lib\:/opt/txbr/OpenCV/lib\:/opt/txbr/imod/IMOD/lib/:g" $(CFGFILE); \
+		sed -i "s:library-dirs.*:library-dirs=/opt/txbr/lib\:/opt/txbr/OpenCV/lib\:/opt/txbr/imod/lib/:g" $(CFGFILE); \
 		sed -i '/install-purelib/d' $(CFGFILE); 	\
 		sed -i '/install-platlib/d' $(CFGFILE);		\
+		export LDFLAGS=/opt/python/lib/libpython2.7.a; 	\
 		$(PY.PATH) setup.py build; 			\
 	)
 	
