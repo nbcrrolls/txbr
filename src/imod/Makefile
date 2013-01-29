@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.2 2013/01/25 00:24:00 clem Exp $
+# $Id: Makefile,v 1.3 2013/01/29 01:28:32 clem Exp $
 #
 # @Copyright@
 # 
@@ -55,6 +55,18 @@
 # @Copyright@
 #
 # $Log: Makefile,v $
+# Revision 1.3  2013/01/29 01:28:32  clem
+# Compiled version of the IMOD blirary
+#
+# This was really painfull (3 days).
+#
+# Their binary version is completely broken they have library with
+# undeclared symbols (i don't even know how they could convince the
+# linker to link their shared libraries)
+#
+# I had to re-compile the source code which uses qmake as a back end
+# and it has some poor Makefile
+#
 # Revision 1.2  2013/01/25 00:24:00  clem
 # Imod package compiling
 #
@@ -72,17 +84,31 @@ include Rules.mk
 
 
 build:
-
+	# source code downloaded from their code repository
+	# hg clone http://bio3d.colorado.edu/imod/nightlyBuilds/IMOD
+	# hg checkout IMOD_4-5-7
+	# Their binary distribution did not work (it had some broken 
+	# library, they ship library with undefined simbol)
+	$(TAR) -xvzf IMOD_$(VERSION).tar.gz
+	(							\
+		export PATH=/usr/lib64/qt4/bin:$$PATH;		\
+		export OPENMP="-fopenmp";			\
+		cd IMOD_$(VERSION);				\
+		./setup -i $(PKGROOT)/$(NAME) -flags -lgomp;	\
+		make -j 4;						\
+	)
 
 	
 install::
 	mkdir -p $(ROOT)/$(PKGROOT)/$(NAME)
 	mkdir -p $(PKGROOT)/$(NAME)
+	cp -a $(PKGROOT)/$(NAME)/*  $(ROOT)/$(PKGROOT)/$(NAME)
+	mount --bind $(ROOT)/$(PKGROOT)/$(NAME) $(PKGROOT)/$(NAME)
 	(							\
-		mount --bind $(ROOT)/$(PKGROOT)/$(NAME) $(PKGROOT)/$(NAME);     \
-		csh imod_4.5.7_RHEL6-64.csh -dir $(PKGROOT)/$(NAME) -script $(PKGROOT)/$(NAME) -yes ; \
-		umount $(PKGROOT)/$(NAME);                      \
+		cd IMOD_$(VERSION); 				\
+		make install;					\
 	)
+	umount $(PKGROOT)/$(NAME)
 
 clean::
 	rm -rf $(NAME)-$(VERSION)
