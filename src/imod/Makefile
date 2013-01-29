@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.3 2013/01/29 01:28:32 clem Exp $
+# $Id: Makefile,v 1.4 2013/01/29 01:29:05 clem Exp $
 #
 # @Copyright@
 # 
@@ -54,27 +54,6 @@
 # 
 # @Copyright@
 #
-# $Log: Makefile,v $
-# Revision 1.3  2013/01/29 01:28:32  clem
-# Compiled version of the IMOD blirary
-#
-# This was really painfull (3 days).
-#
-# Their binary version is completely broken they have library with
-# undeclared symbols (i don't even know how they could convince the
-# linker to link their shared libraries)
-#
-# I had to re-compile the source code which uses qmake as a back end
-# and it has some poor Makefile
-#
-# Revision 1.2  2013/01/25 00:24:00  clem
-# Imod package compiling
-#
-# Revision 1.1  2012/10/23 18:55:08  nadya
-# initial place holder
-#
-# Revision 1.1  2012/10/23 01:50:17  nadya
-# initial partial check in prerequisites
 #
 
 REDHAT.ROOT = $(CURDIR)/../../
