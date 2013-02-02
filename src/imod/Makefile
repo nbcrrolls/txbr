@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.4 2013/01/29 01:29:05 clem Exp $
+# $Id: Makefile,v 1.5 2013/02/02 01:26:52 clem Exp $
 #
 # @Copyright@
 # 
@@ -73,7 +73,7 @@ build:
 		export PATH=/usr/lib64/qt4/bin:$$PATH;		\
 		export OPENMP="-fopenmp";			\
 		cd IMOD_$(VERSION);				\
-		./setup -i $(PKGROOT)/$(NAME) -flags -lgomp;	\
+		./setup -i $(PKGROOT)/$(NAME) -compiler gfortran -flags -lgomp;	\
 		make -j 4;						\
 	)
 
