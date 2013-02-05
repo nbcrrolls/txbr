@@ -1,0 +1,11 @@
+--- IMOD_3.13.5/plugs/noskecommon/_common_functions.h.orig	2013-02-05 14:47:11.854716506 -0800
++++ IMOD_3.13.5/plugs/noskecommon/_common_functions.h	2013-02-05 15:10:23.851987615 -0800
+@@ -30,6 +30,8 @@
+ #include <iostream>			// for redirecting cout
+ #include <string>       // for string
+ #include <algorithm>		// for special algorithms ( such as sort() and tranform() )
++#include <climits>
++#include <cstdio>
+ 
+ using namespace std;
+ 

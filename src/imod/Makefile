@@ -1,4 +1,4 @@
-# $Id: Makefile,v 1.5 2013/02/02 01:26:52 clem Exp $
+# $Id: Makefile,v 1.6 2013/02/05 23:34:38 clem Exp $
 #
 # @Copyright@
 # 
@@ -70,8 +70,9 @@ build:
 	# library, they ship library with undefined simbol)
 	$(TAR) -xvzf IMOD_$(VERSION).tar.gz
 	(							\
-		export PATH=/usr/lib64/qt4/bin:$$PATH;		\
+		export PATH=/usr/lib64/qt-3.3/bin:$$PATH;		\
 		export OPENMP="-fopenmp";			\
+		patch -p0 < patch; 				\
 		cd IMOD_$(VERSION);				\
 		./setup -i $(PKGROOT)/$(NAME) -compiler gfortran -flags -lgomp;	\
 		make -j 4;						\
