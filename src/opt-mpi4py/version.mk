@@ -1,0 +1,4 @@
+NAME = opt-mpi4py
+VERSION = 1.3
+ARCHIVENAME = mpi4py
+RELEASE = 0
