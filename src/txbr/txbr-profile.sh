@@ -1,13 +1,14 @@
-# $Id: Makefile,v 1.4 2013/02/09 00:20:38 clem Exp $
+#
+# $Id: txbr-profile.sh,v 1.1 2013/02/09 00:20:38 clem Exp $
 #
 # @Copyright@
 # 
 # 				Rocks(r)
 # 		         www.rocksclusters.org
-# 		         version 5.5 (Mamba)
-# 		         version 6.0 (Mamba)
+# 		         version 5.6 (Emerald Boa)
+# 		         version 6.1 (Emerald Boa)
 # 
-# Copyright (c) 2000 - 2012 The Regents of the University of California.
+# Copyright (c) 2000 - 2013 The Regents of the University of California.
 # All rights reserved.	
 # 
 # Redistribution and use in source and binary forms, with or without
@@ -54,59 +55,34 @@
 # 
 # @Copyright@
 #
-# $Log: Makefile,v $
-# Revision 1.4  2013/02/09 00:20:38  clem
-# adding env variable to run txbr
-#
-# Revision 1.3  2013/01/29 02:04:53  clem
-# fixes for the new location of the imod
-#
-# trying to get libpython static in the shared object but it doesnot work yet
-#
-# Revision 1.2  2013/01/25 21:55:52  clem
-# First version of compiling txbr
-#
-# it is just compiling, it is still missing several deps
-#
-# Revision 1.1  2012/10/23 01:50:48  nadya
-# initial partial check in prerequisites
 #
 
-REDHAT.ROOT = $(CURDIR)/../../
 
--include $(ROCKSROOT)/etc/Rules.mk
-include Rules.mk
 
-PY.PATH  =  /opt/python/bin/python
-PACKAGE_NAME = TxBR
-SETENV   =  export TXBR=`pwd`; export TXBR_DIR=$(PKGROOT);  \
-                export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$$TXBR/lib;\
-		export IMOD=$(PKGROOT)/IMOD;  
-CFGFILE  =  config/setup.cfg.linux
 
-build:
-	gunzip -c $(PACKAGE_NAME)-beta-$(VERSION).tar.gz | $(TAR) -xf -
-	patch -p0 < fix_libraries_setup_py.patch
-	( 							\
-		cd $(PACKAGE_NAME);				\
-		$(SETENV)					\
-		sed -i "s:include-dirs.*:include-dirs=/opt/txbr/OpenCV/include/opencv\:/opt/txbr/OpenCV/include\:/opt/txbr/include:g" $(CFGFILE); \
-		sed -i "s:library-dirs.*:library-dirs=/opt/txbr/lib\:/opt/txbr/OpenCV/lib\:/opt/txbr/imod/lib/:g" $(CFGFILE); \
-		sed -i '/install-purelib/d' $(CFGFILE); 	\
-		sed -i '/install-platlib/d' $(CFGFILE);		\
-		export LDFLAGS=/opt/python/lib/libpython2.7.a; 	\
-		$(PY.PATH) setup.py build; 			\
-	)
-	
-install::
-	mkdir -p $(ROOT)/$(PKGROOT)/$(NAME)
-	(							\
-		cd $(PACKAGE_NAME);				\
-		$(SETENV)                                       \
-		$(PY.PATH) setup.py install --root=$(ROOT)/;	\
-	)
-	mkdir -p $(ROOT)/etc/profile.d/
-	install txbr-profile.sh $(ROOT)/etc/profile.d/
 
-clean::
-	rm -rf $(NAME)-$(VERSION)
+
+
+
+# add txbr addtional excutables paths 
+Bins="/opt/txbr/scripts /opt/txbr/imod/bin"
+for i in $Bins; do
+	if [ -d ${i} ]; then
+	        if ! echo $PATH | /bin/grep -q $i ; then
+	                export PATH=${PATH}:$i
+	        fi
+	fi
+done
+
+
+# add txbr addtional LD_LIBRARY paths 
+NewLdPaths="/opt/txbr/imod/lib/ /opt/txbr/imod/qtlib/ /opt/txbr/lib/ /opt/txbr/OpenCV/lib"
+for i in $NewLdPaths; do
+        if [ -d ${i} ]; then
+                if ! echo $LD_LIBRARY_PATH | /bin/grep -q $i ; then
+                        export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:$i
+                fi
+        fi
+done
+
+
