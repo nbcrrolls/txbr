@@ -15,6 +15,9 @@
 
 	<changelog>
 	$Log: txbr.xml,v $
+	Revision 1.5  2013/02/09 00:31:18  clem
+	added opt-Pyrex fixed a bootstrap problem
+	
 	Revision 1.4  2013/02/07 21:31:30  clem
 	more dependecies for txbr
 	
@@ -39,6 +42,7 @@
 	<pakcage>opt-matplotlib</package>
 	<pakcage>opt-sympy</package>
 	<pakcage>opt-mpi4py</package>
+	<pakcage>opt-Pyrex</package>
 
 
         <!-- gmp needed by cln,

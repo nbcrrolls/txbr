@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# $Id: bootstrap.sh,v 1.4 2013/02/07 23:03:44 clem Exp $
+# $Id: bootstrap.sh,v 1.5 2013/02/09 00:31:18 clem Exp $
 #
 # @Copyright@
 # @Copyright@
@@ -36,7 +36,9 @@ compile_and_install opt-scipy
 compile_and_install opt-matplotlib
 compile_and_install opt-sympy
 compile_and_install opt-swiginac
-compile_and_install OpenCV
+compile_and_install opt-Pyrex
+compile opencv
+install OpenCV
 compile_and_install txbr-fftw3
 compile_and_install txbr-fftw3f
 compile_and_install imod
