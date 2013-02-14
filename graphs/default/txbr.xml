@@ -15,12 +15,14 @@
 	</copyright>
 
 	<changelog>
-	$Log: txbr.xml,v $
-	Revision 1.1  2012/10/23 01:50:13  nadya
-	initial partial check in prerequisites
 	
 	</changelog>
 
 	<!-- add edges here -->
+
+        <edge from="server" to="txbr"/>
+        <edge from="client" to="txbr"/>
+
+
 
 </graph>
