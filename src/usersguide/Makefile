@@ -1,13 +1,13 @@
-# $Id: Makefile,v 1.1 2012/10/23 01:50:48 nadya Exp $
+# $Id: Makefile,v 1.2 2013/02/14 21:53:23 clem Exp $
 #
 # @Copyright@
 # 
 # 				Rocks(r)
 # 		         www.rocksclusters.org
-# 		         version 5.5 (Mamba)
-# 		         version 6.0 (Mamba)
+# 		         version 5.6 (Emerald Boa)
+# 		         version 6.1 (Emerald Boa)
 # 
-# Copyright (c) 2000 - 2012 The Regents of the University of California.
+# Copyright (c) 2000 - 2013 The Regents of the University of California.
 # All rights reserved.	
 # 
 # Redistribution and use in source and binary forms, with or without
@@ -55,8 +55,8 @@
 # @Copyright@
 #
 # $Log: Makefile,v $
-# Revision 1.1  2012/10/23 01:50:48  nadya
-# initial partial check in prerequisites
+# Revision 1.2  2013/02/14 21:53:23  clem
+# fixing the undocumented documentation
 #
 
 PKGROOT         = /var/www/html/roll-documentation/txbr/$(VERSION)
