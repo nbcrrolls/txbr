@@ -14,35 +14,18 @@
 	</copyright>
 
 	<changelog>
-	$Log: txbr.xml,v $
-	Revision 1.5  2013/02/09 00:31:18  clem
-	added opt-Pyrex fixed a bootstrap problem
-	
-	Revision 1.4  2013/02/07 21:31:30  clem
-	more dependecies for txbr
-	
-	dvipng obviously was not documented anywhere
-	
-	Revision 1.3  2013/01/28 19:27:11  clem
-	some leftover packages to the txbr.xml
-	
-	Revision 1.2  2013/01/24 23:13:37  clem
-	write down dependency hell in txbr.xml to future reference
-	
-	Revision 1.1  2012/10/23 01:50:13  nadya
-	initial partial check in prerequisites
 	
 	</changelog>
 
 	<!-- atlas needed by scipy, 
 	     rpm comes from centos base repo -->
-        <pakcage>atlas</package>
-        <pakcage>atlas-devel</package>
-	<pakcage>opt-scipy</package>
-	<pakcage>opt-matplotlib</package>
-	<pakcage>opt-sympy</package>
-	<pakcage>opt-mpi4py</package>
-	<pakcage>opt-Pyrex</package>
+        <package>atlas</package>
+        <package>atlas-devel</package>
+	<package>opt-scipy</package>
+	<package>opt-matplotlib</package>
+	<package>opt-sympy</package>
+	<package>opt-mpi4py</package>
+	<package>opt-Pyrex</package>
 
 
         <!-- gmp needed by cln,
@@ -51,13 +34,13 @@
              gpm is from base
              cln is from epel
              ginac is from epel-->
-        <pakcage>gmp-devel</package>
+        <package>gmp-devel</package>
         <package>gmp</package>
-        <pakcage>cln-devel</package>
-        <pakcage>cln</package>
-        <pakcage>ginac</package>
-        <pakcage>ginac-devel</package>
-	<pakcage>opt-swiginac</package>
+        <package>cln-devel</package>
+        <package>cln</package>
+        <package>ginac</package>
+        <package>ginac-devel</package>
+	<package>opt-swiginac</package>
 
 	<!-- cmake needed by OpenCV -->
         <package>cmake</package>
