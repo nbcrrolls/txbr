@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# $Id: bootstrap.sh,v 1.5 2013/02/09 00:31:18 clem Exp $
+# $Id: bootstrap.sh,v 1.6 2013/02/15 00:20:46 clem Exp $
 #
 # @Copyright@
 # @Copyright@
@@ -23,12 +23,12 @@ mkdir -p RPMS/x86_64
 
 yum --enablerepo=base install $BasePakg
 for i in $BasePakg; do 
-	cp $YumCacheBase/$i*rpm  RPMS/x86_64/;
+	cp $YumCacheBase/$i*rpm  src/RPMS/;
 done
 
 yum --enablerepo=base install $EpelPakg
 for i in $EpelPakg; do 
-        cp $YumCacheEpel/$i*rpm  RPMS/x86_64/;
+        cp $YumCacheEpel/$i*rpm  src/RPMS;
 done
 
 
