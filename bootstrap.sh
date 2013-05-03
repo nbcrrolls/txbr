@@ -26,7 +26,7 @@ for i in $BasePakg; do
 	cp $YumCacheBase/$i*rpm  src/RPMS/;
 done
 
-yum --enablerepo=base install $EpelPakg
+yum --enablerepo=epel install $EpelPakg
 for i in $EpelPakg; do 
         cp $YumCacheEpel/$i*rpm  src/RPMS;
 done
