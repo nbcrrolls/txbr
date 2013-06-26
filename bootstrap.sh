@@ -13,8 +13,8 @@ YumCache=/var/cache/yum/
 YumCacheBase=$YumCache/base/packages/
 YumCacheEpel=$YumCache/epel/packages/
 
-BasePakg="qt3-devel gmp gmp-devel atlas atlas-devel t1lib dvipng"
-EpelPakg="cln cln-devel ginac ginac-devel cmake"
+BasePakg="qt3-devel gmp gmp-devel atlas atlas-devel t1lib dvipng cmake"
+EpelPakg="cln cln-devel ginac ginac-devel"
 
 
 
