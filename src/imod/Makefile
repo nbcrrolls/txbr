@@ -67,16 +67,16 @@ build:
 	
 install::
 	mkdir -p $(ROOT)/$(PKGROOT)/$(NAME)
-	mkdir -p $(ROOT)/$(PKGROOT)/$(NAME)/etc/profile.d
+	mkdir -p $(ROOT)/etc/profile.d
 	mkdir -p $(PKGROOT)/$(NAME)
 	mount --bind $(ROOT)/$(PKGROOT)/$(NAME) $(PKGROOT)/$(NAME)
 	(							 \
 		csh imod_4.5.8_RHEL6-64.csh -yes 		 \
 			-dir $(PKGROOT)/$(NAME); \
 		mv /etc/profile.d/IMOD-linux.csh                 \
-			$(ROOT)/$(PKGROOT)/$(NAME)/etc/profile.d;\
+			$(ROOT)/etc/profile.d;\
 		mv /etc/profile.d/IMOD-linux.sh                  \
-			$(ROOT)/$(PKGROOT)/$(NAME)/etc/profile.d;\
+			$(ROOT)/etc/profile.d;\
 	)
 	umount $(PKGROOT)/$(NAME)
 
