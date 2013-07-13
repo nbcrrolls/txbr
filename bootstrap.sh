@@ -37,6 +37,10 @@ compile_and_install opt-matplotlib
 compile_and_install opt-sympy
 compile_and_install opt-swiginac
 compile_and_install opt-Pyrex
+compile_and_install opt-configobj
+compile_and_install opt-imaging
+compile_and_install opt-psutil
+
 compile opencv
 install OpenCV
 compile_and_install txbr-fftw3
