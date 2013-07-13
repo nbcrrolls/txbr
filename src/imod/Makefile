@@ -63,30 +63,20 @@ include Rules.mk
 
 
 build:
-	# source code downloaded from their code repository
-	# hg clone http://bio3d.colorado.edu/imod/nightlyBuilds/IMOD
-	# hg checkout IMOD_4-5-7
-	# Their binary distribution did not work (it had some broken 
-	# library, they ship library with undefined simbol)
-	$(TAR) -xvzf IMOD_$(VERSION).tar.gz
-	(							\
-		export PATH=/usr/lib64/qt-3.3/bin:$$PATH;		\
-		export OPENMP="-fopenmp";			\
-		patch -p0 < patch; 				\
-		cd IMOD_$(VERSION);				\
-		./setup -i $(PKGROOT)/$(NAME) -compiler gfortran -flags -lgomp;	\
-		make -j 4;						\
-	)
-
+	echo
 	
 install::
 	mkdir -p $(ROOT)/$(PKGROOT)/$(NAME)
+	mkdir -p $(ROOT)/$(PKGROOT)/$(NAME)/etc/profile.d
 	mkdir -p $(PKGROOT)/$(NAME)
-	cp -a $(PKGROOT)/$(NAME)/*  $(ROOT)/$(PKGROOT)/$(NAME)
 	mount --bind $(ROOT)/$(PKGROOT)/$(NAME) $(PKGROOT)/$(NAME)
-	(							\
-		cd IMOD_$(VERSION); 				\
-		make install;					\
+	(							 \
+		csh imod_4.5.8_RHEL6-64.csh -yes 		 \
+			-dir $(PKGROOT)/$(NAME); \
+		mv /etc/profile.d/IMOD-linux.csh                 \
+			$(ROOT)/$(PKGROOT)/$(NAME)/etc/profile.d;\
+		mv /etc/profile.d/IMOD-linux.sh                  \
+			$(ROOT)/$(PKGROOT)/$(NAME)/etc/profile.d;\
 	)
 	umount $(PKGROOT)/$(NAME)
 
