@@ -65,7 +65,7 @@
 
 
 # add txbr addtional excutables paths 
-Bins="/opt/txbr/scripts /opt/txbr/imod/bin"
+Bins="/opt/txbr/TxBR-v3.1.1-dev/scripts /opt/txbr/imod/IMOD/bin" 
 for i in $Bins; do
 	if [ -d ${i} ]; then
 	        if ! echo $PATH | /bin/grep -q $i ; then
@@ -76,7 +76,7 @@ done
 
 
 # add txbr addtional LD_LIBRARY paths 
-NewLdPaths="/opt/txbr/imod/lib/ /opt/txbr/imod/qtlib/ /opt/txbr/lib/ /opt/txbr/OpenCV/lib"
+NewLdPaths="/opt/txbr/imod/IMOD/qtlib/ /opt/txbr/imod/IMOD/lib/ /opt/txbr/lib/ /opt/txbr/OpenCV/lib"
 for i in $NewLdPaths; do
         if [ -d ${i} ]; then
                 if ! echo $LD_LIBRARY_PATH | /bin/grep -q $i ; then

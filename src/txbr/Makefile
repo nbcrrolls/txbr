@@ -79,30 +79,22 @@ include Rules.mk
 
 PY.PATH  =  /opt/python/bin/python
 PACKAGE_NAME = TxBR
-SETENV   =  export TXBR=`pwd`; export TXBR_DIR=$(PKGROOT);  \
-                export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:$$TXBR/lib;\
-		export IMOD=$(PKGROOT)/IMOD;  
-CFGFILE  =  config/setup.cfg.linux
+SETENV   =  . txbr-profile.sh
 
 build:
-	gunzip -c $(PACKAGE_NAME)-beta-$(VERSION).tar.gz | $(TAR) -xf -
-	patch -p0 < fix_libraries_setup_py.patch
+	gunzip -c $(PACKAGE_NAME)-$(VERSION)-dev.tar.gz | $(TAR) -xf -
 	( 							\
+		$(SETENV);					\
+		cp setup.cfg $(PACKAGE_NAME);			\
 		cd $(PACKAGE_NAME);				\
-		$(SETENV)					\
-		sed -i "s:include-dirs.*:include-dirs=/opt/txbr/OpenCV/include/opencv\:/opt/txbr/OpenCV/include\:/opt/txbr/include:g" $(CFGFILE); \
-		sed -i "s:library-dirs.*:library-dirs=/opt/txbr/lib\:/opt/txbr/OpenCV/lib\:/opt/txbr/imod/lib/:g" $(CFGFILE); \
-		sed -i '/install-purelib/d' $(CFGFILE); 	\
-		sed -i '/install-platlib/d' $(CFGFILE);		\
-		export LDFLAGS=/opt/python/lib/libpython2.7.a; 	\
 		$(PY.PATH) setup.py build; 			\
 	)
 	
 install::
 	mkdir -p $(ROOT)/$(PKGROOT)/$(NAME)
 	(							\
+		$(SETENV);                                      \
 		cd $(PACKAGE_NAME);				\
-		$(SETENV)                                       \
 		$(PY.PATH) setup.py install --root=$(ROOT)/;	\
 	)
 	mkdir -p $(ROOT)/etc/profile.d/

@@ -1,5 +1,5 @@
 PKGROOT		= /opt/txbr
 NAME    	= txbr
-VERSION 	= 3.0.1
+VERSION 	= v3.1.1
 RELEASE 	= 0
-TARBALL_POSTFIX	= tgz
+TARBALL_POSTFIX	= tar.gz
