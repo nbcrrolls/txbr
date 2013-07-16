@@ -79,24 +79,21 @@ include Rules.mk
 
 PY.PATH  =  /opt/python/bin/python
 PACKAGE_NAME = TxBR
-SETENV   =  . txbr-profile.sh
 
 build:
 	gunzip -c $(PACKAGE_NAME)-$(VERSION)-dev.tar.gz | $(TAR) -xf -
 	( 							\
-		$(SETENV);					\
 		cp setup.cfg $(PACKAGE_NAME);			\
 		cd $(PACKAGE_NAME);				\
 		$(PY.PATH) setup.py build; 			\
 	)
 	
 install::
-	mkdir -p $(ROOT)/$(PKGROOT)/$(NAME)
 	(							\
-		$(SETENV);                                      \
 		cd $(PACKAGE_NAME);				\
 		$(PY.PATH) setup.py install --root=$(ROOT)/;	\
 	)
+	ln -s  $(PACKAGE_NAME)-$(VERSION)-dev $(ROOT)/$(PKGROOT)/$(NAME)
 	mkdir -p $(ROOT)/etc/profile.d/
 	install txbr-profile.sh $(ROOT)/etc/profile.d/
 
