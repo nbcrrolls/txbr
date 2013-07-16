@@ -62,12 +62,12 @@
 
 
 
-
+txbr_dir=/opt/txbr
 
 # add txbr addtional excutables paths 
-Bins="/opt/txbr/TxBR-v3.1.1-dev/scripts /opt/txbr/imod/IMOD/bin" 
+Bins="$txbr_dir/txbr/scripts $txbr_dir/imod/IMOD/bin" 
 for i in $Bins; do
-	if [ -d ${i} ]; then
+	if [ -d "$i" ]; then
 	        if ! echo $PATH | /bin/grep -q $i ; then
 	                export PATH=${PATH}:$i
 	        fi
@@ -76,13 +76,23 @@ done
 
 
 # add txbr addtional LD_LIBRARY paths 
-NewLdPaths="/opt/txbr/imod/IMOD/qtlib/ /opt/txbr/imod/IMOD/lib/ /opt/txbr/lib/ /opt/txbr/OpenCV/lib"
+NewLdPaths="$txbr_dir/imod/IMOD/qtlib/ $txbr_dir/imod/IMOD/lib/ $txbr_dir/lib/ $txbr_dir/OpenCV/lib"
 for i in $NewLdPaths; do
-        if [ -d ${i} ]; then
-                if ! echo $LD_LIBRARY_PATH | /bin/grep -q $i ; then
+        if [ -d "$i" ]; then
+                if ! echo "$LD_LIBRARY_PATH" | /bin/grep -q "$i" ; then
                         export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:$i
                 fi
         fi
 done
+
+python_path="$txbr_dir/txbr/lib"
+
+if [ -z "$PYTHONPATH" ]; then
+	if ! echo "$PYTHONPATH" | /bin/grep -q "$python_path"; then
+		export PYTHONPATH="$python_path":$PYTHONPATH;
+	fi
+else
+    export PYTHONPATH="$python_path";
+fi
 
 
