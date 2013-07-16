@@ -1,13 +1,14 @@
-# $Id: Makefile,v 1.4 2013/02/09 00:20:38 clem Exp $
+#
+# $Id: txbr-profile.sh,v 1.1 2013/02/09 00:20:38 clem Exp $
 #
 # @Copyright@
 # 
 # 				Rocks(r)
 # 		         www.rocksclusters.org
-# 		         version 5.5 (Mamba)
-# 		         version 6.0 (Mamba)
+# 		         version 5.6 (Emerald Boa)
+# 		         version 6.1 (Emerald Boa)
 # 
-# Copyright (c) 2000 - 2012 The Regents of the University of California.
+# Copyright (c) 2000 - 2013 The Regents of the University of California.
 # All rights reserved.	
 # 
 # Redistribution and use in source and binary forms, with or without
@@ -54,50 +55,42 @@
 # 
 # @Copyright@
 #
-# $Log: Makefile,v $
-# Revision 1.4  2013/02/09 00:20:38  clem
-# adding env variable to run txbr
-#
-# Revision 1.3  2013/01/29 02:04:53  clem
-# fixes for the new location of the imod
-#
-# trying to get libpython static in the shared object but it doesnot work yet
-#
-# Revision 1.2  2013/01/25 21:55:52  clem
-# First version of compiling txbr
-#
-# it is just compiling, it is still missing several deps
-#
-# Revision 1.1  2012/10/23 01:50:48  nadya
-# initial partial check in prerequisites
 #
 
-REDHAT.ROOT = $(CURDIR)/../../
 
--include $(ROCKSROOT)/etc/Rules.mk
-include Rules.mk
-
-PY.PATH  =  /opt/python/bin/python
-PACKAGE_NAME = TxBR
-
-build:
-	gunzip -c $(PACKAGE_NAME)-$(VERSION)-dev.tar.gz | $(TAR) -xf -
-	( 							\
-		cp setup.cfg $(PACKAGE_NAME);			\
-		cd $(PACKAGE_NAME);				\
-		$(PY.PATH) setup.py build; 			\
-	)
-	
-install::
-	(							\
-		cd $(PACKAGE_NAME);				\
-		$(PY.PATH) setup.py install --root=$(ROOT)/;	\
-	)
-	ln -s  $(PACKAGE_NAME)-$(VERSION)-dev $(ROOT)/$(PKGROOT)/$(NAME)
-	mkdir -p $(ROOT)/etc/profile.d/
-	install txbr-profile.sh $(ROOT)/etc/profile.d/
-	install txbr-profile.csh $(ROOT)/etc/profile.d/
+#
 
 
-clean::
-	rm -rf $(NAME)-$(VERSION)
+set txbr_dir=/opt/txbr
+# PATH
+foreach j (${txbr_dir}/txbr/scripts ${txbr_dir}/imod/IMOD/bin)
+        if ( -d ${j}  ) then
+                echo ${PATH} | /bin/grep -q ${j} 
+                if ( $? != 0) then
+                        setenv PATH "${PATH}:${j}"
+                endif
+        endif
+end
+
+# LD_LIBRARY_PATH
+foreach i (${txbr_dir}/imod/IMOD/qtlib/ ${txbr_dir}/imod/IMOD/lib/ ${txbr_dir}/lib/ ${txbr_dir}/OpenCV/lib)
+        if ( -d ${i} ) then
+                echo ${LD_LIBRARY_PATH} | /bin/grep -q ${i}
+                if ( $? != 0) then
+                        setenv LD_LIBRARY_PATH "${LD_LIBRARY_PATH}:${i}"
+
+                endif
+        endif
+end
+
+# PYTHONPATH
+set python_path="$txbr_dir/txbr/lib"
+if ($?PYTHONPATH) then
+        echo ${PYTHONPATH} | /bin/grep -q "${python_path}"
+        if ( $? != 0) then
+                setenv PYTHONPATH "${PYTHONPATH}:${python_path}"
+        endif
+else
+        setenv PYTHONPATH "${python_path}"
+endif
+
