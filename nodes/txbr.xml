@@ -26,6 +26,10 @@
 	<package>opt-sympy</package>
 	<package>opt-mpi4py</package>
 	<package>opt-Pyrex</package>
+	<package>opt-configobj</package>
+	<package>opt-imaging</package>
+	<package>opt-psutil</package>
+
 
 
         <!-- gmp needed by cln,

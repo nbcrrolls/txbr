@@ -1,5 +1,5 @@
 PKGROOT		= /opt/txbr
 NAME    	= imod
-VERSION 	= 3.13.5
+VERSION 	= 4.5.8
 RELEASE 	= 1
 TARBALL_POSTFIX	= 
