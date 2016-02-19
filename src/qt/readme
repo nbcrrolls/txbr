@@ -1,0 +1,8 @@
+# need for qt (prereq for EPhantom)
+# download qt source
+
+wget --no-check-certificate https://download.qt.io/archive/qt/4.8/4.8.5/qt-everywhere-opensource-src-4.8.5.tar.gz
+
+# to install txbr-qt rpm need 
+
+yum --enablerepo=base install libjpeg-turbo.x86_64
