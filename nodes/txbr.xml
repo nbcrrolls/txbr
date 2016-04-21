@@ -29,8 +29,9 @@
 	<package>opt-configobj</package>
 	<package>opt-imaging</package>
 	<package>opt-psutil</package>
-
-
+	<package>opt-dateutil</package>
+	<package>opt-pyparsing</package>
+	<package>opt-pytz</package>
 
         <!-- gmp needed by cln,
              cln needed by ginac,
@@ -48,11 +49,12 @@
 
 	<!-- cmake needed by OpenCV -->
         <package>cmake</package>
-        <package>OpenCV</package>
+        <package>opencv</package>
 
         <package>txbr-fftw3</package>
-        <package>txbr-fftw3f</package>
 
+        <!-- qt is needed by imod --> 
+        <package>txbr-qt</package>
         <package>imod</package>
 
 	<!-- t1lib
@@ -63,6 +65,5 @@
 
 	<package>txbr</package>
 	<package>roll-txbr-usersguide</package>
-
 
 </kickstart>
