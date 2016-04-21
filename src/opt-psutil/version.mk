@@ -1,4 +1,4 @@
 NAME = opt-psutil
-VERSION = 1.0.1
+VERSION = 3.2.1
 ARCHIVENAME = psutil
 RELEASE = 0
