@@ -9,30 +9,24 @@
 
 . $ROLLSROOT/etc/bootstrap-functions.sh
 
-YumCache=/var/cache/yum/
-YumCacheBase=$YumCache/base/packages/
-YumCacheEpel=$YumCache/epel/packages/
-
 BasePakg="qt3-devel gmp gmp-devel atlas atlas-devel t1lib dvipng cmake"
 EpelPakg="cln cln-devel ginac ginac-devel"
 
+# install base packages
+yum install $BasePakg
 
-
-
-mkdir -p RPMS/x86_64
-
-yum --enablerepo=base install $BasePakg
-for i in $BasePakg; do 
-	cp $YumCacheBase/$i*rpm  src/RPMS/;
-done
-
-yum --enablerepo=epel install $EpelPakg
+# download and install epel packages
+RpmDir=./src/RPMS
+yumdownloader --enablerepo=epel --destdir=$RpmDir --archlist=x86_64 $EpelPakg
 for i in $EpelPakg; do 
-        cp $YumCacheEpel/$i*rpm  src/RPMS;
+        yum install $RpmDir/$i*.x86_64.rpm;
 done
 
-
+# compile and install prerequisites 
 compile_and_install opt-scipy
+compile_and_install opt-dateutil
+compile_and_install opt-pytz
+compile_and_install opt-pyparsing
 compile_and_install opt-matplotlib
 compile_and_install opt-sympy
 compile_and_install opt-swiginac
@@ -40,11 +34,8 @@ compile_and_install opt-Pyrex
 compile_and_install opt-configobj
 compile_and_install opt-imaging
 compile_and_install opt-psutil
-
-compile opencv
-install OpenCV
+compile_and_install opencv
 compile_and_install txbr-fftw3
-compile_and_install txbr-fftw3f
+compile_and_install txbr-qt
 compile_and_install imod
-
 
