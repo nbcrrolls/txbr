@@ -1,4 +1,4 @@
 NAME = opt-scipy
-VERSION = 0.11.0
+VERSION = 0.17.0
 ARCHIVENAME = scipy
 RELEASE = 0
