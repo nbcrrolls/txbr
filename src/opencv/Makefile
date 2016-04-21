@@ -73,7 +73,7 @@ PYTHON_LIB      = /opt/python/lib
 PYTHON_PACKAGES = $(PYTHON_LIB)/python2.7/site-packages
 
 build:
-	tar xvjf  $(NAME)-$(VERSION).$(TARBALL_POSTFIX) 
+	unzip $(NAME)-$(VERSION).$(TARBALL_POSTFIX) 
 	( 							  \
 		cd $(NAME)-$(VERSION);				  \
 		cmake -D CMAKE_BUILD_TYPE=RELEASE                 \
