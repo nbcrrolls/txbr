@@ -56,7 +56,7 @@
 #
 
 PKGROOT		= /opt/$(NAME)
-REDHAT.ROOT	= $(PWD)/../../
+REDHAT.ROOT	= $(PWD)/../..
 MAKE.iscontrib	= 1
 -include $(ROCKSROOT)/etc/Rules.mk
 include Rules.mk
