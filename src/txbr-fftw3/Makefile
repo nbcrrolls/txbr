@@ -72,19 +72,32 @@ include Rules.mk
 
 
 build:
-	gunzip -c fftw-$(VERSION).$(TARBALL_POSTFIX) | $(TAR) -xf -
+	gunzip -c $(ARCHIVENAME)-$(VERSION).$(TARBALL_POSTFIX) | $(TAR) -xf -
+	mv $(ARCHIVENAME)-$(VERSION) $(ARCHIVENAME)-$(VERSION)-single;				\
 	( 							\
-		cd fftw-$(VERSION);				\
+		cd $(ARCHIVENAME)-$(VERSION)-single;				\
 		./configure --prefix=$(PKGROOT) --enable-shared;	\
+		$(MAKE);					\
+	)
+	gunzip -c $(ARCHIVENAME)-$(VERSION).$(TARBALL_POSTFIX) | $(TAR) -xf -
+	mv $(ARCHIVENAME)-$(VERSION) $(ARCHIVENAME)-$(VERSION)-double;				\
+	( 							\
+		cd $(ARCHIVENAME)-$(VERSION)-double;				\
+		./configure --prefix=$(PKGROOT) --enable-float --enable-shared;	\
 		$(MAKE);					\
 	)
 	
 install::
 	mkdir -p $(ROOT)/$(PKGROOT)/
 	(							\
-		cd fftw-$(VERSION);				\
+		cd $(ARCHIVENAME)-$(VERSION)-single;				\
+		$(MAKE) prefix=$(ROOT)/$(PKGROOT) install;\
+	)
+	(							\
+		cd $(ARCHIVENAME)-$(VERSION)-double;				\
 		$(MAKE) prefix=$(ROOT)/$(PKGROOT) install;\
 	)
 
 clean::
-	rm -rf $(NAME)-$(VERSION)
+	rm -rf $(ARCHIVENAME)-$(VERSION)-single
+	rm -rf $(ARCHIVENAME)-$(VERSION)-double
