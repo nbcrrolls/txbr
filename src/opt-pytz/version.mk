@@ -1,0 +1,4 @@
+NAME = opt-pytz
+VERSION = 2016.3
+ARCHIVENAME = pytz
+RELEASE = 0

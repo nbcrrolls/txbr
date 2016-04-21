@@ -1,4 +1,4 @@
 NAME = opt-matplotlib
-VERSION = 1.2.0
+VERSION = 1.5.1
 ARCHIVENAME = matplotlib
 RELEASE = 0
