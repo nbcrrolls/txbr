@@ -15,6 +15,9 @@ EpelPakg="cln cln-devel ginac ginac-devel"
 # install base packages
 yum install $BasePakg
 
+# install libjpeg-turbo, needed for compiling and installing qt
+yum install libjpeg-turbo.x86_64
+
 # download and install epel packages
 RpmDir=./src/RPMS
 yumdownloader --enablerepo=epel --destdir=$RpmDir --archlist=x86_64 $EpelPakg
