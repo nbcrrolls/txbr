@@ -53,7 +53,9 @@
 
         <package>txbr-fftw3</package>
 
-        <!-- qt is needed by imod --> 
+        <!-- libjpeg-turbo needed by qt
+             qt is needed by imod --> 
+        <package>libjpeg-turbo</package>
         <package>txbr-qt</package>
         <package>imod</package>
 
