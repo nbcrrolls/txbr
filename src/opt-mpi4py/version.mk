@@ -2,3 +2,6 @@ NAME = opt-mpi4py
 VERSION = 2.0.0
 ARCHIVENAME = mpi4py
 RELEASE = 0
+
+RPM.EXTRAS = AutoReq:No
+
