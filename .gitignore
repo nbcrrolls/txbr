@@ -1,0 +1,23 @@
+# ignore RPMS
+# ignore diretoreis created during build
+BUILD
+RPMS
+SOURCES
+SPECS
+
+# yum downloaded RPMs
+src/RPMS/*.rpm
+
+# make  and profiles files
+Rolls.mk
+Rules*.mk
+_arch
+_distribution
+_os
+bootstrap.py
+python.mk
+rocks*.mk
+roll*.mk
+
+# large source files
+src/qt/qt-everywhere-opensource-src-4.8.5.tar.gz
