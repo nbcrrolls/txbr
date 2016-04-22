@@ -61,24 +61,24 @@ REDHAT.ROOT = $(CURDIR)/../../
 -include $(ROCKSROOT)/etc/Rules.mk
 include Rules.mk
 
-
 build:
-	echo
-	
-install::
+	tar xf $(ARCHIVENAME).$(TARBALL_POSTFIX) 
+	(cd patch-files && find . -type f | grep -v CVS | cpio -pduv ../)
 	mkdir -p $(ROOT)/$(PKGROOT)/$(NAME)
-	mkdir -p $(ROOT)/etc/profile.d
-	mkdir -p $(PKGROOT)/$(NAME)
-	mount --bind $(ROOT)/$(PKGROOT)/$(NAME) $(PKGROOT)/$(NAME)
-	(							 \
-		csh imod_4.5.8_RHEL6-64.csh -yes 		 \
-			-dir $(PKGROOT)/$(NAME); \
-		mv /etc/profile.d/IMOD-linux.csh                 \
-			$(ROOT)/etc/profile.d;\
-		mv /etc/profile.d/IMOD-linux.sh                  \
-			$(ROOT)/etc/profile.d;\
-	)
-	umount $(PKGROOT)/$(NAME)
+	(                                              \
+		cd $(ARCHIVENAME);                     \
+		export QTDIR=$(QTDIR);                 \
+		export QMAKESPEC=$(QMAKESPEC);         \
+		export PATH=$(QTDIR)/bin:$(PATH);      \
+		./setup -i $(ROOT)/$(PKGROOT)/$(NAME); \
+		$(MAKE);                               \
+        )
+
+install::
+	(                                              \
+		cd $(ARCHIVENAME);                     \
+		$(MAKE) install;                       \
+        )
 
 clean::
-	rm -rf $(NAME)-$(VERSION)
+	rm -rf $(ARCHIVENAME)     
