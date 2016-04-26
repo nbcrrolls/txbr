@@ -10,19 +10,22 @@ Changelog
 -------------
 Update packages for Rocks 6.2
 
-  :package     :old     :new
-  :scipy       :0.11.0  :0.17.0
-  :matplotlib  :1.2.0   :1.5.1
-  :dateutil    :-       :2.5.2  (previously with matplotlib)
-  :pytz        :-       :2016.3 (previously with matplotlib)
-  :pyparsing   :-       :2016.3 (previously with matplotlib)
-  :sympy       :0.7.2   :0.7.6.1
-  :swiginac    :1.5.1   :1.5.1.1
-  :configobj   :4.7.2   :5.0.6
-  :psutil      :1.0.1   :3.2.1
-  :fftw        :3.3.2   :3.3.4
-  :imod        :4.5.8   :4.7.12 (move to compiling)
-  :mpi4py      :1.3     :2.0.0
+  ==========  ======  ====================================
+  package     old     new
+  ==========  ====== ====================================
+  scipy       0.11.0 0.17.0
+  matplotlib  1.2.0  1.5.1
+  dateutil    -      2.5.2  (previously with matplotlib)
+  pytz        -      2016.3 (previously with matplotlib)
+  pyparsing   -      2016.3 (previously with matplotlib)
+  sympy       0.7.2  0.7.6.1
+  swiginac    1.5.1  1.5.1.1
+  configobj   4.7.2  5.0.6
+  psutil      1.0.1  3.2.1
+  fftw        3.3.2  3.3.4
+  imod        4.5.8  4.7.12 (move to compiling)
+  mpi4py      1.3    2.0.0
+  ==========  ====== ====================================
 
 Downloads 
 ----------
