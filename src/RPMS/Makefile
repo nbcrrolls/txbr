@@ -61,7 +61,10 @@ MAKE.iscontrib	= 1
 -include $(ROCKSROOT)/etc/Rules.mk
 include Rules.mk
 
-rpm::
+build:
 	mkdir -p $(REDHAT.RPMS)/$(ARCH)/
+
+
+rpm::   build
 	cp *.$(ARCH).rpm $(REDHAT.RPMS)/$(ARCH)/
 
