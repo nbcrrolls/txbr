@@ -1,7 +1,7 @@
 # ignore RPMS
 # ignore diretoreis created during build
 BUILD
-RPMS
+./RPMS
 SOURCES
 SPECS
 
