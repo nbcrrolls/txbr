@@ -9,7 +9,7 @@
 
 . $ROLLSROOT/etc/bootstrap-functions.sh
 
-BasePakg="qt3-devel gmp gmp-devel atlas atlas-devel t1lib dvipng cmake"
+BasePakg="qt3-devel gmp gmp-devel atlas atlas-devel t1lib dvipng cmake libgomp"
 EpelPakg="cln cln-devel ginac ginac-devel"
 
 # install base packages
