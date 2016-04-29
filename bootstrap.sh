@@ -7,7 +7,11 @@
 #
 #
 
+# set google url for dowloading sources
+. $NBCRDEVEL/bootstrap-values.sh
+
 . $ROLLSROOT/etc/bootstrap-functions.sh
+echo "WARNING: before making a roll download source for txbr from nbcr.ucsd@gmail.com goodledrive in privaterools/"
 
 BasePakg="qt3-devel gmp gmp-devel atlas atlas-devel t1lib dvipng cmake libgomp"
 EpelPakg="cln cln-devel ginac ginac-devel"

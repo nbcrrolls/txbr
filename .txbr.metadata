@@ -1,0 +1,16 @@
+ce4a008a45e2918b174677396bb5d3e5efb9ac10  src/imod/imod_4.7.12_src.tar.gz
+add3ae15e3f0d2d28d37370dcad930243cb4145c  src/opt-configobj/configobj-5.0.6.tar.gz
+b25dd877c43f7de38abc5a20e213920fe9a889f2  src/opt-dateutil/python-dateutil-2.5.2.tar.gz
+76c37504251171fda8da8e63ecb8bc42a69a5c81  src/opt-imaging/Imaging-1.1.7.tar.gz
+7a2e307bb9898893d4ff38f8f129cfa9dfe5ac92  src/opt-matplotlib/matplotlib-1.5.1.tar.gz
+65a71175a15c53be7de1132fd498f28f38bb1714  src/opt-mpi4py/mpi4py-2.0.0.tar.gz
+7741b34e6f64c296ab132741b00e70763ed1fd7b  src/opt-psutil/psutil-3.2.1.tar.gz
+39299b6bb894a27fb9cd5b548c21d168b893b434  src/opt-pyparsing/pyparsing-2.0.3.tar.gz
+7ed91685dd0bb7f06474b7ad915a7cac4177fa67  src/opt-Pyrex/Pyrex-0.9.9.tar.gz
+f3e21a4e0cfc8aea1faa35dfefa31b5e9255cd24  src/opt-pytz/pytz-2016.3.tar.gz
+d785d7e0becde9047dcf384e3119cff3a2c34667  src/opt-scipy/scipy-0.17.0.tar.gz
+d3067a31686466580b589c6bb184ec494bf740a5  src/opt-swiginac/swiginac-1.5.1.1.tgz
+2ea14b715ac22b0231759b536617a78450829204  src/opt-sympy/sympy-0.7.6.1.tar.gz
+745f9ebf091696c0d5403ce691dc28c039d77b9e  src/qt/qt-everywhere-opensource-src-4.8.5.tar.gz
+fd508bac8ac13b3a46152c54b7ac885b69734262  src/txbr-fftw3/fftw-3.3.4.tar.gz
+54579c8c6545f622e08b2d737e78c00786140cec  src/txbr/TxBR-v3.1.1-dev.tar.gz
