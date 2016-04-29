@@ -65,6 +65,8 @@
         <package>dvipng</package>
 
 
+	<!-- libgomp is needed by txbr -->
+	<package>libgomp</package>
 	<package>txbr</package>
 	<package>roll-txbr-usersguide</package>
 

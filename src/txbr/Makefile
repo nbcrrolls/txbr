@@ -82,6 +82,7 @@ PACKAGE_NAME = TxBR
 
 build:
 	gunzip -c $(PACKAGE_NAME)-$(VERSION)-dev.tar.gz | $(TAR) -xf -
+	(cd patch-files && find . -type f | grep -v CVS | cpio -pduv ../)
 	( 							\
 		cp setup.cfg $(PACKAGE_NAME);			\
 		cd $(PACKAGE_NAME);				\
@@ -101,3 +102,4 @@ install::
 
 clean::
 	rm -rf $(NAME)-$(VERSION)
+	rm -rf $(PACKAGE_NAME)
