@@ -55,15 +55,10 @@
 # 
 # @Copyright@
 #
-#
-
-
-#
-
 
 set txbr_dir=/opt/txbr
 # PATH
-foreach j (${txbr_dir}/txbr/scripts ${txbr_dir}/imod/IMOD/bin)
+foreach j (${txbr_dir}/txbr/scripts ${txbr_dir}/imod/bin ${txbr_dir}/qt/bin ${txbr_dir}/opencv/bin)
         if ( -d ${j}  ) then
                 echo ${PATH} | /bin/grep -q ${j} 
                 if ( $? != 0) then
@@ -73,7 +68,7 @@ foreach j (${txbr_dir}/txbr/scripts ${txbr_dir}/imod/IMOD/bin)
 end
 
 # LD_LIBRARY_PATH
-foreach i (${txbr_dir}/imod/IMOD/qtlib/ ${txbr_dir}/imod/IMOD/lib/ ${txbr_dir}/lib/ ${txbr_dir}/OpenCV/lib)
+foreach i (${txbr_dir}/imod/lib ${txbr_dir}/imod/qt/lib ${txbr_dir}/lib ${txbr_dir}/opencv/lib)
         if ( -d ${i} ) then
                 echo ${LD_LIBRARY_PATH} | /bin/grep -q ${i}
                 if ( $? != 0) then

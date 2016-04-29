@@ -57,15 +57,10 @@
 #
 #
 
-
-
-
-
-
 txbr_dir=/opt/txbr
 
 # add txbr addtional excutables paths 
-Bins="$txbr_dir/txbr/scripts $txbr_dir/imod/IMOD/bin" 
+Bins="$txbr_dir/txbr/scripts $txbr_dir/imod/bin $txbr_dir/qt/bin $txbr_dir/opencv/bin" 
 for i in $Bins; do
 	if [ -d "$i" ]; then
 	        if ! echo $PATH | /bin/grep -q $i ; then
@@ -74,9 +69,8 @@ for i in $Bins; do
 	fi
 done
 
-
 # add txbr addtional LD_LIBRARY paths 
-NewLdPaths="$txbr_dir/imod/IMOD/qtlib/ $txbr_dir/imod/IMOD/lib/ $txbr_dir/lib/ $txbr_dir/OpenCV/lib"
+NewLdPaths="$txbr_dir/imod/lib $txbr_dir/qt/lib/ $txbr_dir/lib/ $txbr_dir/opencv/lib"
 for i in $NewLdPaths; do
         if [ -d "$i" ]; then
                 if ! echo "$LD_LIBRARY_PATH" | /bin/grep -q "$i" ; then
@@ -94,5 +88,3 @@ if [ -z "$PYTHONPATH" ]; then
 else
     export PYTHONPATH="$python_path";
 fi
-
-
