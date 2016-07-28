@@ -69,31 +69,37 @@ REDHAT.ROOT = $(CURDIR)/../../
 
 -include $(ROCKSROOT)/etc/Rules.mk
 include Rules.mk
-PYTHON_LIB      = /opt/python/lib
-PYTHON_PACKAGES = $(PYTHON_LIB)/python2.7/site-packages
+
+PY.PATH = /opt/python
+PYTHON = python2.7
+PYTHON_INC = $(PY.PATH)/include/$(PYTHON)
+PYTHON_LIB = $(PY.PATH)/lib/$(PYTHON)/site-packages
 
 build:
 	unzip $(NAME)-$(VERSION).$(TARBALL_POSTFIX) 
 	( 							  \
 		cd $(NAME)-$(VERSION);				  \
+		mkdir release; cd release ;			  \
 		cmake -D CMAKE_BUILD_TYPE=RELEASE                 \
 		      -D CMAKE_INSTALL_PREFIX=$(PKGROOT)/$(NAME)  \
-		      -D BUILD_PYTHON_SUPPORT=ON                  \
-		      -D PYTHON_EXECUTABLE=/opt/python/bin/python \
-		      -D PYTHON_PACKAGES_PATH=$(PYTHON_PACKAGES)  \
-		       -D PYTHON_LIBRARIES=$(PYTHON_LIB) .;     \
+		      -D BUILD_opencv_python:BOOL=ON              \
+		      -D PYTHON2_EXECUTABLE=$(PY.PATH)/bin/$(PYTHON) \
+		      -D PYTHON2_INCLUDE_DIR=$(PYTHON_INC) \
+		      -D PYTHON2_LIBRARY=$(PYTHON_LIB) \
+		      -D INSTALL_PYTHON_EXAMPLES:BOOL=ON ..;\
 		$(MAKE) -j 4;					  \
 	)
-	
+
+
 install::
 	mkdir -p $(ROOT)/$(PKGROOT)/$(NAME)
 	mkdir -p $(PKGROOT)/$(NAME)
 	(							\
-		cd $(NAME)-$(VERSION);				\
+		cd $(NAME)-$(VERSION)/release;				\
 		mount --bind $(ROOT)/$(PKGROOT)/$(NAME) $(PKGROOT)/$(NAME);     \
 		$(MAKE) install;                                \
-		mkdir -p $(ROOT)/$(PYTHON_PACKAGES);            \
-		cp $(PYTHON_PACKAGES)/cv* $(ROOT)/$(PYTHON_PACKAGES); \
+		mkdir -p $(ROOT)/$(PYTHON_LIB);            \
+		cp $(PKGROOT)/$(NAME)/lib/$(PYTHON)/site-packages/cv* $(ROOT)/$(PYTHON_LIB); \
 		umount $(PKGROOT)/$(NAME);                      \
 	)
 
