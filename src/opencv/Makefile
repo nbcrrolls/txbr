@@ -79,6 +79,7 @@ build:
 	unzip $(NAME)-$(VERSION).$(TARBALL_POSTFIX) 
 	( 							  \
 		cd $(NAME)-$(VERSION);				  \
+		module load opt-python;  			   \
 		mkdir release; cd release ;			  \
 		cmake -D CMAKE_BUILD_TYPE=RELEASE                 \
 		      -D CMAKE_INSTALL_PREFIX=$(PKGROOT)/$(NAME)  \
