@@ -74,35 +74,36 @@ PY.PATH = /opt/python
 PYTHON = python2.7
 PYTHON_INC = $(PY.PATH)/include/$(PYTHON)
 PYTHON_LIB = $(PY.PATH)/lib/$(PYTHON)/site-packages
+PYTHON_PACKAGES = $(PYTHON_LIB)
 
 build:
-	unzip $(NAME)-$(VERSION).$(TARBALL_POSTFIX) 
-	( 							  \
-		cd $(NAME)-$(VERSION);				  \
-		module load opt-python;  			   \
-		mkdir release; cd release ;			  \
+	tar xjf  $(ARCHIVENAME)-$(VERSION).$(TARBALL_POSTFIX) 
+	(                                                         \
+		cd $(ARCHIVENAME)-$(VERSION);                            \
+		module load opt-python;                           \
+		mkdir release; cd release ;                       \
 		cmake -D CMAKE_BUILD_TYPE=RELEASE                 \
-		      -D CMAKE_INSTALL_PREFIX=$(PKGROOT)/$(NAME)  \
-		      -D BUILD_opencv_python:BOOL=ON              \
-		      -D PYTHON2_EXECUTABLE=$(PY.PATH)/bin/$(PYTHON) \
-		      -D PYTHON2_INCLUDE_DIR=$(PYTHON_INC) \
-		      -D PYTHON2_LIBRARY=$(PYTHON_LIB) \
-		      -D INSTALL_PYTHON_EXAMPLES:BOOL=ON ..;\
-		$(MAKE) -j 4;					  \
+		    -D CMAKE_INSTALL_PREFIX=$(PKGROOT)/$(ARCHIVENAME)    \
+		    -D BUILD_opencv_python:BOOL=ON                \
+		    -D PYTHON_EXECUTABLE=$(PY.PATH)/bin/$(PYTHON) \
+		    -D PYTHON_INCLUDE_DIR=$(PYTHON_INC)           \
+		    -D PYTHON_LIBRARY=$(PYTHON_LIB)               \
+		    -D PYTHON_PACKAGES_PATH=$(PYTHON_LIB)         \
+		    -D INSTALL_PYTHON_EXAMPLES:BOOL=ON ..;        \
+		$(MAKE) -j 4;                                     \
 	)
 
-
 install::
-	mkdir -p $(ROOT)/$(PKGROOT)/$(NAME)
-	mkdir -p $(PKGROOT)/$(NAME)
-	(							\
-		cd $(NAME)-$(VERSION)/release;				\
-		mount --bind $(ROOT)/$(PKGROOT)/$(NAME) $(PKGROOT)/$(NAME);     \
-		$(MAKE) install;                                \
-		mkdir -p $(ROOT)/$(PYTHON_LIB);            \
-		cp $(PKGROOT)/$(NAME)/lib/$(PYTHON)/site-packages/cv* $(ROOT)/$(PYTHON_LIB); \
-		umount $(PKGROOT)/$(NAME);                      \
+	mkdir -p $(ROOT)/$(PKGROOT)/$(ARCHIVENAME)
+	mkdir -p $(PKGROOT)/$(ARCHIVENAME)
+	(                                                         \
+		cd $(ARCHIVENAME)-$(VERSION)/release;                    \
+		mount --bind $(ROOT)/$(PKGROOT)/$(ARCHIVENAME) $(PKGROOT)/$(ARCHIVENAME); \
+		$(MAKE) install;                                  \
+		mkdir -p $(ROOT)/$(PYTHON_PACKAGES);              \
+		cp $(PYTHON_PACKAGES)/cv* $(ROOT)/$(PYTHON_PACKAGES); \
+		umount $(PKGROOT)/$(ARCHIVENAME);                        \
 	)
 
 clean::
-	rm -rf $(NAME)-$(VERSION)
+	rm -rf $(ARCHIVENAME)-$(VERSION)

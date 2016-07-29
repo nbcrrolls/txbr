@@ -49,7 +49,7 @@
 
 	<!-- cmake needed by OpenCV -->
         <package>cmake</package>
-        <package>opencv</package>
+        <package>txbr-opencv</package>
 
         <package>txbr-fftw3</package>
 

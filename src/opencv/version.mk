@@ -1,5 +1,6 @@
 PKGROOT		= /opt/txbr
-NAME    	= opencv
-VERSION 	= 3.1.0
+ARCHIVENAME    	= OpenCV
+NAME    	= txbr-opencv
+VERSION 	= 2.4.2
 RELEASE 	= 0
-TARBALL_POSTFIX	= zip
+TARBALL_POSTFIX	= tar.bz2
