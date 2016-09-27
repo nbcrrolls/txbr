@@ -80,8 +80,15 @@ include Rules.mk
 PY.PATH  =  /opt/python/bin/python
 PACKAGE_NAME = TxBR
 
+pretar:: $(VERSION.MK.INCLUDE)
+
+$(VERSION.MK.INCLUDE): 
+	if [ -f $(VERSION.MK.MASTER.DIR)/$(VERSION.MK.MASTER) ]; then \
+		/bin/cp $(VERSION.MK.MASTER.DIR)/$(VERSION.MK.MASTER) $@; \
+	fi
+
 build:
-	gunzip -c $(PACKAGE_NAME)-$(VERSION)-dev.tar.gz | $(TAR) -xf -
+	gunzip -c $(PACKAGE_NAME)-v$(VERSION)-dev.tar.gz | $(TAR) -xf -
 	(cd patch-files && find . -type f | grep -v CVS | cpio -pduv ../)
 	( 							\
 		cp setup.cfg $(PACKAGE_NAME);			\
@@ -95,11 +102,12 @@ install::
 		$(PY.PATH) setup.py install --root=$(ROOT)/;	\
 	)
 	ln -s  $(PACKAGE_NAME)-$(VERSION)-dev $(ROOT)/$(PKGROOT)/$(NAME)
-	mkdir -p $(ROOT)/etc/profile.d/
-	install txbr-profile.sh $(ROOT)/etc/profile.d/
-	install txbr-profile.csh $(ROOT)/etc/profile.d/
+	#mkdir -p $(ROOT)/etc/profile.d/
+	#install txbr-profile.sh $(ROOT)/etc/profile.d/
+	#install txbr-profile.csh $(ROOT)/etc/profile.d/
 
 
 clean::
 	rm -rf $(NAME)-$(VERSION)
 	rm -rf $(PACKAGE_NAME)
+	rm -rf $(VERSION.MK.INCLUDE)
