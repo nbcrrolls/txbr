@@ -1,0 +1,19 @@
+#%Module1.0
+module-whatis "blender"
+module-whatis "Version: @VERSION@"
+
+prepend-path PATH @TXBRDIR@/bin:@TXBRDIR@/txbr/scripts
+prepend-path PATH @TXBRDIR@/qt/bin
+append-path PATH @TXBRDIR@/imod/bin
+append-path PATH @TXBRDIR@/OpenCV/bin
+
+append-path LD_LIBRARY_PATH @TXBRDIR@/lib
+append-path LD_LIBRARY_PATH @TXBRDIR@/qt/lib
+append-path LD_LIBRARY_PATH @TXBRDIR@/imod/lib
+append-path LD_LIBRARY_PATH @TXBRDIR@/OpenCV/lib
+
+prepend-path PYTHONPATH @TXBRDIR@/txbr/lib
+
+module load opt-python
+module load openmpi-gnu-eth  
+
